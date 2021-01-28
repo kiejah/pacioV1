@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Parcel;
-use App\Sender;
-use App\Receipient;
+use Illuminate\Support\Facades\Validator;
+
 
 class ParcelController extends Controller
 {
     //
     public function parcels(){
-        return response()->json(Parcel::all(),200);
+        try {
+            return response()->json(Parcel::all(),200);
+        } catch (\Throwable $th) {
+            return response()->json($th,404);
+        }
+
     }
     public function parcelByCode($t_code){
         $parcel = Parcel::where('parcelTrackerCode',$t_code)->first();
@@ -19,53 +24,57 @@ class ParcelController extends Controller
             return response()->json(["message"=>"Record Not Found"],404);
          }
         return response()->json($parcel,200);
+
     }
     public function storeParcel(Request $request){
 
+        // try {
+        //     //code...
+        //
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        //     return response()->json($th,404);
+        // }
+            $rules=[
+                'user_id'=>'required|numeric',
+                'company_id'=>'required|numeric',
+                'parcelTrackerCode'=>'required|numeric',
+                'parcelNote'=>'required',
+                'parcelName'=>'required',
+                'parcelWeight'=>'required|numeric',
+                'fee'=>'required|numeric',
+                'bookedDate'=>'required',
+                'parcelFrom'=>'required',
+                'parcelTo'=>'required',
+            ];
+            $validator = Validator::make($request->all(),$rules);
+            if ($validator->fails()) {
+                return response()->json(["message"=>$validator->errors()],400);
+            }
+            $parcel = Parcel::create($request->all());
+            return response()->json($parcel,200);
 
-        $user_id = $request->user_id;
-        $company_id = $request->company_id;
 
-        //save parcel details
-        $parcel = new Parcel();
-        $sender = new Sender();
-        $receiver = new Receipient();
 
-        $parcel->user_id = $user_id;
-        $parcel->company_id = $company_id;
-        $parcel->parcelTrackerCode = $request->parcelTrackerCode;
-        $parcel->parcelNote = $request->parcelNote;
-        $parcel->parcelName = $request->parcel_name;
-        $parcel->parcelWeight = $request->parcelWeight;
-        $parcel->fee = $request->fee;
-        $parcel->bookedDate = $request->bookedDate;
-        $parcel->parcelFrom = $request->parcelFrom;
-        $parcel->parcelTo = $request->parcelTo;
-        $parcel->save();
+    }
+    public function updateParcel(Request $request,$t_code){
 
-        //save sender
-        $sender->user_id= $user_id;
-        $sender->company_id= $company_id;
-        $sender->parcelTrackerCode= $request->parcelTrackerCode;
-        $sender->name= $request->sender_name;
-        $sender->email= $request->sender_email;
-        $sender->nationalID= $request->sender_natID;
-        $sender->phoneNumber= $request->sender_phonenumber;
-        $sender->altPhoneNumber= $request->sender_altPhoneNumber;
-        $sender->save();
+        $parcel = Parcel::where('parcelTrackerCode',$t_code)->first();
+         if(is_null($parcel)){
+            return response()->json(["message"=>"That Tracker  code does not match any records"],404);
+         }
+         Parcel::where('parcelTrackerCode',$t_code)->update($request->all());
+         return response()->json("success update",200);
+    }
+    public function deleteParcel(Request $request,$t_code){
 
-        //save receipient
-        $receiver->user_id= $user_id;
-        $receiver->company_id= $company_id;
-        $receiver->parcelTrackerCode= $request->parcelTrackerCode;
-        $receiver->name= $request->receiver_name;
-        $receiver->email= $request->receiver_email;
-        $receiver->nationalID= $request->receiver_natID;
-        $receiver->phoneNumber= $request->receiver_phonenumber;
-        $receiver->altPhoneNumber= $request->receiver_altPhoneNumber;
-        $receiver->save();
+        $parcel = Parcel::where('parcelTrackerCode',$t_code)->first();
+         if(is_null($parcel)){
+            return response()->json(["message"=>"Cannot delete a record that does not exist"],404);
+         }
+        Parcel::where('parcelTrackerCode',$t_code)->delete();
+        return response()->json("Record Deleted",204);
 
-        return response()->json($parcel,201);
     }
 
 }

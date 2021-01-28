@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('parcels','ParcelController@parcels');
 Route::get('parcel/{t_code}','ParcelController@parcelByCode');
 Route::post('parcel','ParcelController@storeParcel');
+Route::put('parcel/{t_code}','ParcelController@updateParcel');
+Route::delete('parcel/{t_code}','ParcelController@deleteParcel');
