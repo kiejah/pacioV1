@@ -30,8 +30,8 @@
 
                                 <div class="form-group">
                                     <label for="">Parcel Name</label>
-                                    <input name="parcel_name" type="text" class="form-control" id="parcel_name_id" placeholder="Parcel Name">
-                                    @error('parcel_name')
+                                    <input name="parcelName" type="text" class="form-control" id="parcelName_id" placeholder="Parcel Name">
+                                    @error('parcelName')
                                         <small class="text-danger">
                                             {{ $message }}
                                         </small>

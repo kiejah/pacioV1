@@ -12,6 +12,18 @@ class Parcel extends Model
         'created_at',
         'updated_at',
     ];
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'parcelTrackerCode',
+        'parcelNote',
+        'parcelName',
+        'parcelWeight',
+        'fee',
+        'bookedDate',
+        'parcelFrom',
+        'parcelTo',
+    ];
 
 
     public function company(){

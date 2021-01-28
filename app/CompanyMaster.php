@@ -9,7 +9,24 @@ class CompanyMaster extends Model
 {
     //
 
-    protected $guarded = [];
+    protected $guarded = [
+        'id',
+        'updated_at',
+        'created_at',
+        'company_logo',
+    ];
+    protected $fillable = [
+            'company_name',
+            'company_address',
+            'company_phone',
+            'company_country',
+            'company_email',
+            'companyRegNumber',
+            'status',
+            'contactpersonName',
+            'contactpersonPhone',
+            'contactpersonEmail',
+    ];
 
 
     public function parcels(){

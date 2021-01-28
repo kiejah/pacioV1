@@ -39,7 +39,7 @@ class DashboardController extends Controller
         $parcel->company_id = $company_id;
         $parcel->parcelTrackerCode = $request->parcelTrackerCode;
         $parcel->parcelNote = $request->parcelNote;
-        $parcel->parcelName = $request->parcel_name;
+        $parcel->parcelName = $request->parcelName;
         $parcel->parcelWeight = $request->parcelWeight;
         $parcel->fee = $request->fee;
         $parcel->bookedDate = $request->bookedDate;
