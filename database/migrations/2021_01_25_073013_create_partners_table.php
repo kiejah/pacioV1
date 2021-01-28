@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCompanyRegNumberColumnToCompanyMastersTable extends Migration
+class CreatePartnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class AddCompanyRegNumberColumnToCompanyMastersTable extends Migration
      */
     public function up()
     {
-        Schema::table('company_masters', function (Blueprint $table) {
-            //
+        Schema::create('partners', function (Blueprint $table) {
+            $table->id();
+            $table->string('companyName');
             $table->string('companyRegNumber')->nullable();
+            $table->string('companyEmail');
+            $table->string('partnerName');
+            $table->text('partnerJoinNote');
+            $table->string('partnerPhone');
+            $table->string('partnerNationalID');
             $table->enum('status', array('active', 'inactive'))->default('active');
-            $table->string('contactpersonName');
-            $table->string('contactpersonPhone');
-            $table->string('contactpersonEmail');
+            $table->timestamps();
         });
     }
 
@@ -30,8 +34,6 @@ class AddCompanyRegNumberColumnToCompanyMastersTable extends Migration
      */
     public function down()
     {
-        Schema::table('company_masters', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('partners');
     }
 }
