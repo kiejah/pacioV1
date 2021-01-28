@@ -17,10 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-/*
-Route::get('parcels','ParcelController@parcels');
-Route::get('parcel/{t_code}','ParcelController@parcelByCode');
-Route::post('parcel','ParcelController@storeParcel');
-Route::put('parcel/{t_code}','ParcelController@updateParcel');
-Route::delete('parcel/{t_code}','ParcelController@deleteParcel');*/
-Route::apiResource('parcel','API\ParcelContoller');
+
+Route::apiResource('parcels','API\ParcelContoller');
+Route::apiResource('receipients','API\ReceipientController');
+Route::apiResource('senders','API\SenderController');

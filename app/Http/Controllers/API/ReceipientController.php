@@ -4,10 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Parcel;
+
+use App\Receipient;
 use Illuminate\Support\Facades\Validator;
 
-class ParcelContoller extends Controller
+class ReceipientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,7 @@ class ParcelContoller extends Controller
     {
         //
         try {
-            return response()->json(Parcel::all(),200);
+            return response()->json(Receipient::all(),200);
         } catch (\Throwable $th) {
             return response()->json($th,404);
         }
@@ -47,20 +48,18 @@ class ParcelContoller extends Controller
             'user_id'=>'required|numeric',
             'company_id'=>'required|numeric',
             'parcelTrackerCode'=>'required',
-            'parcelNote'=>'required',
-            'parcelName'=>'required',
-            'parcelWeight'=>'required|numeric',
-            'fee'=>'required|numeric',
-            'bookedDate'=>'required',
-            'parcelFrom'=>'required',
-            'parcelTo'=>'required',
+            'name'=>'required',
+            'email'=>'required|email',
+            'nationalID'=>'required|numeric',
+            'phoneNumber'=>'required',
+            'altPhoneNumber'=>'required',
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()) {
             return response()->json(["message"=>$validator->errors()],400);
         }
-        $parcel = Parcel::create($request->all());
-        return response()->json($parcel,200);
+        $recipient = Receipient::create($request->all());
+        return response()->json($recipient,200);
     }
 
     /**
@@ -72,11 +71,11 @@ class ParcelContoller extends Controller
     public function show($id)
     {
         //
-        $parcel = Parcel::where('parcelTrackerCode',$id)->first();
-        if(is_null($parcel)){
+        $recipient = Receipient::where('parcelTrackerCode',$id)->first();
+        if(is_null($recipient)){
            return response()->json(["message"=>"Record Not Found"],404);
         }
-       return response()->json($parcel,200);
+       return response()->json($recipient,200);
     }
 
     /**
@@ -100,11 +99,11 @@ class ParcelContoller extends Controller
     public function update(Request $request, $id)
     {
         //
-        $parcel = Parcel::where('parcelTrackerCode',$id)->first();
-        if(is_null($parcel)){
-           return response()->json(["message"=>"That Tracker  code does not match any records"],404);
+        $recipient = Receipient::where('parcelTrackerCode',$id)->first();
+        if(is_null($recipient)){
+           return response()->json(["message"=>"a Receiver with that TrackerCode does not match any records"],404);
         }
-        Parcel::where('parcelTrackerCode',$id)->update($request->all());
+        Receipient::where('parcelTrackerCode',$id)->update($request->all());
         return response()->json("success update",200);
     }
 
@@ -117,11 +116,11 @@ class ParcelContoller extends Controller
     public function destroy($id)
     {
         //
-        // $parcel = Parcel::where('parcelTrackerCode',$id)->first();
+        // $parcel = Receipient::where('parcelTrackerCode',$id)->first();
         //  if(is_null($parcel)){
-        //     return response()->json(["message"=>"Cannot delete a record that does not exist"],404);
+        //     return response()->json( ["message"=>"Cannot delete a record that does not exist"],404);
         //  }
-        // Parcel::where('parcelTrackerCode',$id)->delete();
+        // Receipient::where('parcelTrackerCode',$id)->delete();
         return response()->json("Operation Not Allowed",404);
     }
 }
