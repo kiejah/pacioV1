@@ -28,7 +28,9 @@ class CompanyMaster extends Model
             'contactpersonEmail',
     ];
 
-
+    public function user(){
+        return $this->hasMany(User::class);
+    }
     public function parcels(){
         return $this->hasMany('App\Parcel');
     }

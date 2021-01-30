@@ -13,7 +13,7 @@
     <div class="card card-primary card-outline">
         <div class="card-header">
           <h5 class="card-title m-0">
-              @if (count($parcels) > 0)
+              @if (count($users) > 0)
 
               <a href="{{ route('staff.parcel.add_parcel_details_form')}}">
                 <span class="float-right text-success"><i class="fas fa-plus"></i>&nbsp;Add Parcel</span>
@@ -27,8 +27,8 @@
         </div>
         <div class="card-body">
 
-            @if (count($parcels) > 0)
-                @include('staff.parcels.parcel_list')
+            @if (count($users) > 0)
+                @include('staff.users.user_list')
             @else
                 @php
                     return redirect()->route('parcel.add_parcel_details_form');

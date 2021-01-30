@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\CompanyMaster;
+use App\Parcel;
+use App\Receipient;
+use App\Sender;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -32,6 +35,23 @@ class CompanyMasterController extends Controller
         }else{
             return view('admin.company.index',compact('companies'));
         }
+    }
+    public function parcels()
+    {
+        //
+        $parcels = Parcel::all();
+
+        return view('admin.parcels.index',compact('parcels'));
+
+    }
+    public function users()
+    {
+        //
+        $users = User::query()->where('id', '<>', 1)
+                ->get();
+
+        return view('admin.users.index',compact('users'));
+
     }
 
     /**

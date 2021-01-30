@@ -38,6 +38,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function role(){
-        return $this->belongsTo('App/Role','role_id');
+        return $this->belongsTo(Role::class,'role_id');
+    }
+    public function company(){
+        return $this->belongsTo(CompanyMaster::class,'company_id');
     }
 }

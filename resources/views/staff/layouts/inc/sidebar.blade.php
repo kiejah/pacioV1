@@ -1,3 +1,4 @@
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
@@ -16,7 +17,7 @@
           <img src="{{ adminAsset('dist/img/user2-160x160.jpg') }} " class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name}}</a>
+            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -46,19 +47,55 @@
                     </a>
                     <ul class="nav nav-treeview" style="display:{{ dStyle(isActive('staff/parcels*'))}}">
                       <li class="nav-item">
-                        <a href="{{ route('staff.parcels.view')}}" class="nav-link">
+                        <a href="{{ route('staff.parcels.view')}}" class="nav-link {{ isActive('staff/parcels') }}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>All</p>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a href="{{ route('staff.parcel.add_parcel_details_form')}}" class="nav-link">
+                     @if (Auth::user()->role_id == 2)
+
+                     <li class="nav-item">
+                        <a href="{{ route('staff.parcel.add_parcel_details_form')}}" class="nav-link {{ isActive('staff/parcels/new-parcel-details') }}" >
                           <i class="far fa-circle nav-icon"></i>
                           <p>Add New</p>
                         </a>
                       </li>
+
+                     @endif
+
                     </ul>
                 </li>
+
+                @if (Auth::user()->role_id == 2)
+                <li class="nav-item has-treeview " style="display:{{ dStyle(isActive('staff/parcels*'))}}">
+                    <a href="#" class="nav-link {{ isActive('staff/users*')}}" >
+                      <i class="nav-icon fas fa-copy"></i>
+                      <p>
+                        Users
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display:{{ dStyle(isActive('staff/users*'))}}">
+                      <li class="nav-item">
+                        <a href="{{ route('staff.users.view')}}" class="nav-link {{ isActive('staff/users')}}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>All</p>
+                        </a>
+                      </li>
+
+                     <li class="nav-item">
+                        <a href="{{ route('staff.users.add-new-user')}}" class="nav-link {{ isActive('staff/users/new-user')}}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Add New</p>
+                        </a>
+                      </li>
+
+
+
+                    </ul>
+                </li>
+                @endif
+
 
 
 

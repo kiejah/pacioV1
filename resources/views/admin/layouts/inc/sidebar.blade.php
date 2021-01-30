@@ -46,7 +46,7 @@
 
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="" class="nav-link {{ isActive('admin/parcels*')}}">
+                    <a href="{{ route('admin.parcel.view')}}" class="nav-link {{ isActive('admin/parcels*')}}">
                         <i class="nav-icon fas fa-gift"></i>
                         <p>
                         Parcels
@@ -55,7 +55,7 @@
 
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="" class="nav-link {{ isActive('admin/parcels*')}}">
+                    <a href="{{ route('admin.users.view')}}" class="nav-link {{ isActive('admin/users*')}}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                         Users

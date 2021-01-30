@@ -27,7 +27,7 @@ class Parcel extends Model
 
 
     public function company(){
-        return $this->belongsTo('App\Company');
+        return $this->belongsTo('App\CompanyMaster','company_id');
     }
     public function sender(){
         return $this->belongsTo(Sender::class,'parcelTrackerCode','parcelTrackerCode');

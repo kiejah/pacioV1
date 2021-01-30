@@ -19,13 +19,18 @@ Route::group(['as'=>'admin.','prefix' => 'admin','namespace'=>'Admin','middlewar
     Route::get('users', 'CompanyMasterController@users')->name('users.view');
     Route::get('users/new-user', 'CompanyMasterController@addNewUser')->name('users.add-new-user');
     Route::post('users/new-user', 'CompanyMasterController@storeUser')->name('user.store');
+    Route::get('parcels', 'CompanyMasterController@parcels')->name('parcel.view');
 });
 
 Route::group(['as'=>'staff.','prefix' => 'staff','namespace'=>'Staff','middleware'=>['auth','staff']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('parcels', 'DashboardController@parcelsView')->name('parcels.view');
+    Route::get('parcels/{id}', 'DashboardController@parcelView')->name('parcel.view-parcel');
     Route::get('parcels/new-parcel-details', 'DashboardController@addNewParcelDetails')->name('parcel.add_parcel_details_form');
     Route::post('parcels/create-parcel', 'DashboardController@storeParcel')->name('parcel.store');
+    Route::get('users','DashboardController@users')->name('users.view');
+    Route::get('users/new-user', 'DashboardController@addNewUser')->name('users.add-new-user');
+    Route::post('users/new-user', 'DashboardController@storeUser')->name('user.store');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -16,7 +16,12 @@
         @foreach ($parcels as $parcel)
 
         <tr>
-            <td></td>
+            <td>
+                <a href=" {{ route('staff.parcel.view-parcel',$parcel->id)}} "><small><i class="fas fa-eye text-primary"></small></i></a><br>
+                <small><i class="fas fa-pen text-success"></small></i><br>
+                <small><i class="fas fa-trash text-danger"></small></i>
+
+            </td>
             <td>{{ $parcel->parcelName}}</td>
             <td>{{ $parcel->parcelTrackerCode}}</td>
             <td>{{ $parcel->sender->name}}- {{ $parcel->sender->phoneNumber}}/ {{ $parcel->sender->altPhoneNumber}}</td>

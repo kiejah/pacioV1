@@ -9,6 +9,10 @@ use App\CompanyMaster;
 use App\Parcel;
 use App\Sender;
 use App\Receipient;
+use App\Role;
+use App\User;
+
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -21,8 +25,14 @@ class DashboardController extends Controller
     }
     public function parcelsView(){
 
-        $parcels = Parcel::all();
+        $company_id = Auth::user()->company_id;
+        $parcels = Parcel::where('company_id',$company_id)->get();
         return view('staff.parcels.index',compact('parcels'));
+    }
+    public function parcelView($id){
+
+        $parcel = Parcel::find($id);
+        return view('staff.parcels.parcel_view',compact('parcel'));
     }
     public function storeParcel(Request $request){
 
@@ -72,6 +82,70 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success',"Parcel datails Saved Suucessfully");
 
+
+    }
+
+    public function users()
+    {
+        //
+        $user_id = Auth::user()->id;
+        $users = User::query()->where('id', '<>', 1)
+                ->where('id', '<>', $user_id )
+                ->where('role_id', '<>', 2)
+                ->get();
+
+        return view('staff.users.index',compact('users'));
+
+    }
+    public function addNewUser()
+    {
+        $companies = CompanyMaster::all();
+        $roles = Role::query()->where('id', '<>', 1)
+                ->get();
+        return view('staff.users.add_new_user',compact('companies','roles'));
+    }
+    public function storeUser(Request $request)
+    {
+
+        // $validator = Validator::make($request->all(), [
+        //     'role_id' => 'required',
+        //     'branch_id' => 'required',
+        //     'company_id' => 'required',
+        //     'user_fullname' => 'required|min:5|max:255',
+        //     'email' => 'required|email',
+        //     'branch_id' => 'required|unique:posts|max:255',
+        //     'password' => 'required|between:8,255|confirmed',
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect()
+        //                 ->back()
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }else{
+
+
+            if($request->password != $request->password_confirmation){
+                return redirect()->back()->with('danger',"Passwords Did Not Match");
+            }else{
+             try{
+
+                DB::table('users')->insert([
+                    'role_id'=> (int)$request->user_role,
+                    'branch_id'=> 1,
+                    'company_id'=> (int)$request->user_company,
+                    'name'=>$request->user_fullname,
+                    'username'=> str_replace(' ','.',$request->user_fullname),
+                    'email'=> $request->user_email,
+                    'password'=>bcrypt($request->password)
+
+                    ]);
+                }catch(\Exception $e){
+                    // do task when error
+                    dd($e->getMessage());   // insert query
+                 }
+
+                return redirect()->back()->with('success',"User created sucessfully");
+            }
 
     }
 }
