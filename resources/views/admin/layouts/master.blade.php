@@ -74,6 +74,10 @@
 
 <!-- jQuery -->
 <script src="{{ adminAsset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ adminAsset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
 <!-- Bootstrap 4 -->
 <script src="{{ adminAsset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->

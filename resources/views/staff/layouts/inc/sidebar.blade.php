@@ -39,9 +39,9 @@
 
                 <li class="nav-item has-treeview ">
                     <a href="#" class="nav-link {{ isActive('staff/parcels*')}}" >
-                      <i class="nav-icon fas fa-copy"></i>
+                      <i class="nav-icon fas fa-gift"></i>
                       <p>
-                        Parcels
+                        Parcel Management
                         <i class="fas fa-angle-left right"></i>
                       </p>
                     </a>
@@ -49,7 +49,7 @@
                       <li class="nav-item">
                         <a href="{{ route('staff.parcels.view')}}" class="nav-link {{ isActive('staff/parcels') }}">
                           <i class="far fa-circle nav-icon"></i>
-                          <p>All</p>
+                          <p>Parcels</p>
                         </a>
                       </li>
                      @if (Auth::user()->role_id == 2)
@@ -65,13 +65,37 @@
 
                     </ul>
                 </li>
+                <li class="nav-item has-treeview " style="display:{{ dStyle(isActive('staff/routes*'))}}">
+                    <a href="#" class="nav-link {{ isActive('staff/routes*')}}" >
+                      <i class="nav-icon fas fa-route"></i>
+                      <p>
+                        Route Management
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display:{{ dStyle(isActive('staff/routes'))}}">
+                      <li class="nav-item">
+                        <a href="" class="nav-link {{ isActive('staff/routes')}}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Routes </p>
+                        </a>
+                      </li>
 
+                     <li class="nav-item">
+                        <a href="{{ route('staff.users.add-new-user')}}" class="nav-link {{ isActive('staff/users/new-user')}}">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Route Charges</p>
+                        </a>
+                      </li>
+
+                    </ul>
+                </li>
                 @if (Auth::user()->role_id == 2)
                 <li class="nav-item has-treeview " style="display:{{ dStyle(isActive('staff/parcels*'))}}">
                     <a href="#" class="nav-link {{ isActive('staff/users*')}}" >
-                      <i class="nav-icon fas fa-copy"></i>
+                      <i class="nav-icon fas fa-user-cog"></i>
                       <p>
-                        Users
+                        Staff Management
                         <i class="fas fa-angle-left right"></i>
                       </p>
                     </a>
@@ -89,8 +113,6 @@
                           <p>Add New</p>
                         </a>
                       </li>
-
-
 
                     </ul>
                 </li>

@@ -37,7 +37,7 @@
           </li>
           <li class="nav-header">Company Management</li>
                 <li class="nav-item has-treeview">
-                <a href="{{ route('admin.company.view')}}" class="nav-link {{ isActive('admin/company-master*')}}">
+                <a href="{{ route('admin.company-master.index')}}" class="nav-link {{ isActive('admin/company-master*')}}">
                     <i class="nav-icon fas fa-building"></i>
                     <p>
                     Companies
@@ -54,30 +54,87 @@
                     </a>
 
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="{{ route('admin.users.view')}}" class="nav-link {{ isActive('admin/users*')}}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                        Users
-                        </p>
 
+                <li class="nav-item has-treeview "  style="display:{{ dStyle(isActive('admin/users'))}}">
+                    <a href="#" class="nav-link {{ isActive('admin/users*')}} ">
+                      <i class="nav-icon fas fa-user-cog"></i>
+                      <p>
+                        User Management
+                        <i class="fas fa-angle-left right"></i>
+                      </p>
                     </a>
+                    <ul class="nav nav-treeview" style="display:{{ dStyle(isActive('admin/users*'))}}">
+                        <li class="nav-item has-treeview">
+                            <a href="{{ route('admin.users.view')}}" class="nav-link {{ isActive('admin/users')}}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                Users
+                                </p>
 
-                    <a href="{{ route('admin.users.add-new-user')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user-plus"></i>
-                        <p>
-                        + New User
-                        </p>
+                            </a>
+                      </li>
+                      <li class="nav-item has-treeview">
+                        <a href="{{ route('admin.users.add-new-user')}}" class="nav-link {{ isActive('admin/users/new-user')}}">
+                            <i class="nav-icon fas fa-user-plus"></i>
+                            <p>
+                            New User
+                            </p>
 
-                    </a>
+                        </a>
+                      </li>
 
-                </li>
+
+                    </ul>
+                  </li>
+
 
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-circle nav-icon"></i>
               <p>
                 Parcel Status
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../layout/top-nav.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dispatched</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>In Transit</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Arrived</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Collected</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pending Collection</p>
+                </a>
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item has-treeview ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                Reports
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

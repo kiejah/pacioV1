@@ -17,9 +17,11 @@ class CompanyMaster extends Model
     ];
     protected $fillable = [
             'company_name',
+            'company_code',
             'company_address',
             'company_phone',
-            'company_country',
+            'country_id',
+            'area_id',
             'company_email',
             'companyRegNumber',
             'status',
@@ -27,12 +29,14 @@ class CompanyMaster extends Model
             'contactpersonPhone',
             'contactpersonEmail',
     ];
-
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
     public function user(){
         return $this->hasMany(User::class);
     }
     public function parcels(){
-        return $this->hasMany('App\Parcel');
+        return $this->hasMany(Parcel::class);
     }
     public function sender(){
         return $this->hasMany(Sender::class);

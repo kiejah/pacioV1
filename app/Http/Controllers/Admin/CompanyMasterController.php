@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\CompanyMaster;
 use App\Parcel;
+use App\Country;
 use App\Receipient;
 use App\Sender;
 use App\Role;
@@ -104,10 +105,11 @@ class CompanyMasterController extends Controller
                     $company = new CompanyMaster();
 
                     $company->company_name = $request->company_name;
+                    $company->company_code = $request->company_code;
                     $company->company_logo = $imageName;
                     $company->company_phone = $request->company_phone;
                     $company->company_address = $request->company_address;
-                    $company->company_country = $request->company_country;
+                    $company->country_id = $request->country_id;
                     $company->company_email = $request->company_email;
                     $company->companyRegNumber = $request->companyRegNumber;
                     $company->contactpersonName = $request->contactpersonName;
@@ -115,7 +117,7 @@ class CompanyMasterController extends Controller
                     $company->contactpersonEmail = $request->contactpersonEmail;
                     $company->save();
 
-                    return redirect()->route('admin.company.view')->with('success',"Company details saved successfully");
+                    return redirect()->route('admin.company-master.index')->with('success',"Company details saved successfully");
     }
 
     /**
@@ -138,6 +140,9 @@ class CompanyMasterController extends Controller
     public function edit($id)
     {
         //
+        $company = CompanyMaster::find($id);
+        $countries = Country::all();
+        return view('admin.company.edit_company',compact('countries','company'));
     }
 
     /**
@@ -149,7 +154,9 @@ class CompanyMasterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        CompanyMaster::where('id',$id)->update($request->except(['_token','company_logo']));
+        return redirect()->route('admin.company-master.index')->with('success',"Company details edited successfully");
     }
 
     /**
@@ -164,7 +171,8 @@ class CompanyMasterController extends Controller
     }
     Public function addNewCompanyView(){
 
-        return view('admin.company.add_new_company',compact('companies'));
+        $countries = Country::all();
+        return view('admin.company.add_new_company',compact('countries'));
     }
     public function addNewUser()
     {

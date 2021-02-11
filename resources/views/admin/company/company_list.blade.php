@@ -17,11 +17,17 @@
         @foreach ($companies as $company)
 
         <tr>
-            <td></td>
+            <td>
+
+                <a href="{{ URL::to('admin/company-master/'.$company->id.'/edit')}}"><small><i class="fas fa-eye text-primary "></small></i></a><br>
+                <small><i class="fas fa-pen text-su ccess"></small></i><br>
+                <small><i class="fas fa-trash text-danger"></small></i>
+
+            </td>
             <td>{{ $company->company_name}}</td>
             <td>{{ $company->company_address}}</td>
             <td>{{ $company->company_phone}}</td>
-            <td>{{ $company->company_country}}</td>
+            <td>{{ $company->country->country_name}}</td>
             <td>{{ $company->companyRegNumber}}</td>
             <td>{{ $company->contactpersonName}}</td>
             <td>{{ $company->contactpersonPhone}}</td>

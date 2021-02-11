@@ -16,10 +16,11 @@ class CreateCompanyMastersTable extends Migration
         Schema::create('company_masters', function (Blueprint $table) {
             $table->id();
             $table->string('company_name');
+            $table->string('company_codes');
             $table->string('company_logo')->default('company_logo.png');
             $table->text('company_address');
             $table->string('company_phone');
-            $table->string('company_country');
+            $table->string('country_id');
             $table->string('company_email');
             $table->string('companyRegNumber')->nullable();
             $table->enum('status', array('active', 'inactive'))->default('active');
