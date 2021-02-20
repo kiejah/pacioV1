@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\CompanyMaster;
 use App\Parcel;
 use App\Country;
+use App\Area;
+use App\AreaType;
 use App\Receipient;
 use App\Sender;
 use App\Role;
@@ -106,6 +108,7 @@ class CompanyMasterController extends Controller
 
                     $company->company_name = $request->company_name;
                     $company->company_code = $request->company_code;
+                    $company->area_id = $request->area_id;
                     $company->company_logo = $imageName;
                     $company->company_phone = $request->company_phone;
                     $company->company_address = $request->company_address;
@@ -142,7 +145,9 @@ class CompanyMasterController extends Controller
         //
         $company = CompanyMaster::find($id);
         $countries = Country::all();
-        return view('admin.company.edit_company',compact('countries','company'));
+        $areas = Area::all();
+        $area_type_name = AreaType::where('id', $company->area->area_type_id)->value('area_type_name');
+        return view('admin.company.edit_company',compact('countries','company','areas','area_type_name'));
     }
 
     /**
@@ -172,7 +177,8 @@ class CompanyMasterController extends Controller
     Public function addNewCompanyView(){
 
         $countries = Country::all();
-        return view('admin.company.add_new_company',compact('countries'));
+        $areas = Area::all();
+        return view('admin.company.add_new_company',compact('countries','areas'));
     }
     public function addNewUser()
     {

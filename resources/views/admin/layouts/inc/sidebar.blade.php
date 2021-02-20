@@ -46,6 +46,24 @@
 
                 </li>
                 <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.location.index')}}" class="nav-link {{ isActive('admin/location*')}}">
+                        <i class="nav-icon fas fa-location-arrow"></i>
+                        <p>
+                        Locations
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="" class="nav-link {{ isActive('admin/delivery_offices*')}}">
+                        <i class="nav-icon fas fa-laptop-house"></i>
+                        <p>
+                        Delivery Offices
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item has-treeview">
                     <a href="{{ route('admin.parcel.view')}}" class="nav-link {{ isActive('admin/parcels*')}}">
                         <i class="nav-icon fas fa-gift"></i>
                         <p>

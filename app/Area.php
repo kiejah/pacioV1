@@ -15,5 +15,11 @@ class Area extends Model
         'area_code',
         'area_capital'
     ];
+    public function company(){
+        return $this->hasMany(CompanyMaster::class);
+    }
+    public function areaType(){
+        return $this->belongTo(AreaType::class,'area_type_id');
+    }
 
 }

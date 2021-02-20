@@ -19,8 +19,8 @@
         <tr>
             <td>
 
-                <a href="{{ URL::to('admin/company-master/'.$company->id.'/edit')}}"><small><i class="fas fa-eye text-primary "></small></i></a><br>
-                <small><i class="fas fa-pen text-su ccess"></small></i><br>
+                <a href="#"><small><i class="fas fa-eye text-primary "></small></i></a><br>
+                <a href="{{ URL::to('admin/company-master/'.$company->id.'/edit')}}"><small><i class="fas fa-pen text-su ccess"></small></i></a><br>
                 <small><i class="fas fa-trash text-danger"></small></i>
 
             </td>

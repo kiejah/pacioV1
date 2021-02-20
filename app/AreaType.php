@@ -13,5 +13,8 @@ class AreaType extends Model
     protected $fillable = [
         'area_type_name'
     ];
+    public function area(){
+        return $this->hasMany(Area::class);
+    }
 
 }

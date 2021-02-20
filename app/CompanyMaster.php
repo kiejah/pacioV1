@@ -44,5 +44,8 @@ class CompanyMaster extends Model
     public function recipient(){
         return $this->hasMany(Receipient::class);
     }
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
 
 }
