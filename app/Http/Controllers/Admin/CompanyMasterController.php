@@ -226,7 +226,6 @@ class CompanyMasterController extends Controller
                     // do task when error
                     dd($e->getMessage());   // insert query
                  }
-
                 return redirect()->back()->with('success',"User created sucessfully");
             }
 

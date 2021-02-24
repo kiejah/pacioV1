@@ -16,9 +16,9 @@ class CreateDeliveryLocationsTable extends Migration
         Schema::create('delivery_locations', function (Blueprint $table) {
             $table->id();
             $table->integer('delivery_location_type_id')->default(1);
-            $table->string('delivery_location_name');
             $table->integer('delivery_location_area_id');
-            $table->string('delivery_location_code');
+            $table->string('delivery_location_name');
+            $table->string('delivery_location_code');// incremental from 00
             $table->string('delivery_location_status')->default('active');
             $table->string('delivery_location_parent');
         });

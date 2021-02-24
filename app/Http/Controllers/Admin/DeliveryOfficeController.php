@@ -4,34 +4,31 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\PacioCompanyDeliveryOffice;
 use App\DeliveryLocation;
-use App\Country;
-use App\DeliveryLocationType;
-use App\Area;
+use App\CompanyMaster;
 use Illuminate\Support\Facades\Validator;
 
 
-class LocationsController extends Controller
+class DeliveryOfficeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    protected $county,$country,$location_type;
-    function __construct()
-    {
-        $this->country = Country::all();
-        $this->county = Area::all();
-        $this->location_type = DeliveryLocationType::all();
+    protected $companies, $locations;
 
+    public function __construct() {
+        $this->companies = CompanyMaster::all();
+        $this->locations = DeliveryLocation::all();
     }
     public function index()
     {
         //
-        $del_locations= DeliveryLocation::all();
-        return view('admin.locations.index',compact('del_locations'));
 
+        $delivery_offices = PacioCompanyDeliveryOffice::all();
+        return view('admin.delivery-offices.index',compact('delivery_offices'));
     }
 
     /**
@@ -42,10 +39,9 @@ class LocationsController extends Controller
     public function create()
     {
         //
-        $countries = $this->country;
-        $counties = $this->county;
-        $location_types = $this->location_type;
-        return view('admin.locations.new_location',compact('countries','counties','location_types'));
+        $companies = $this->companies;
+        $locations = $this->locations;
+        return view('admin.delivery-offices.new_office',compact('companies','locations'));
     }
 
     /**
@@ -57,14 +53,12 @@ class LocationsController extends Controller
     public function store(Request $request)
     {
         //
-          //
-          $rules=[
-            'delivery_location_type_id'=>'required',
-            'delivery_location_name'=>'required',
-            'delivery_location_area_id'=>'required',
-            'delivery_location_code'=>'required',
-            'delivery_location_parent'=>'required'
-
+        $rules=[
+            'delivery_office_name'=>'required',
+            'company_id'=>'required',
+            'delivery_location_id'=>'required',
+            'office_contact_1'=>'required',
+            'office_contact_2'=>'required'
         ];
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()) {
@@ -73,8 +67,8 @@ class LocationsController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        DeliveryLocation::create($request->all());
-        return redirect()->back()->with('success',"Location Created Successfully");
+        PacioCompanyDeliveryOffice::create($request->all());
+        return redirect()->back()->with('success',"Delivery Office Created Successfully");
     }
 
     /**

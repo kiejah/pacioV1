@@ -24,6 +24,7 @@ Route::group(['as'=>'admin.','prefix' => 'admin','namespace'=>'Admin','middlewar
     Route::get('parcels', 'CompanyMasterController@parcels')->name('parcel.view');
     Route::post('company-master/{id}', 'CompanyMasterController@update')->name('company.update');
     Route::resource('location', 'LocationsController');
+    Route::resource('delivery-office', 'DeliveryOfficeController');
 
 });
 
