@@ -29,10 +29,6 @@
         </div>
       </div>
 
-            {{-- <!-- general form elements -->
-                          <!-- /.card -->
-               --}}
-
 
 
 
