@@ -14,8 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['prefix' => 'company/admin'], function(){
+    Route::post('/register', 'Api\UserAuthController@register' );
+});
+
+
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+    // Route::get('/user', function( Request $request ){
+    //   return $request->user();
+    Route::post('/login', 'Api\UserAuthController@login' );
+
 });
 
 Route::apiResource('parcels','API\ParcelContoller');

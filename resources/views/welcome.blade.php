@@ -72,29 +72,21 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        {{-- <a href="{{ route('login') }}">Login</a> --}}
 
-                        @if (Route::has('register'))
+                        {{-- @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
-                        @endif
+                        @endif --}}
                     @endauth
                 </div>
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title m-b-md text-bold text-primary">
                     Pacio
                 </div>
-
-                <div class="links">
-                    <a href="#">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Partners</a>
-                    <a href="#">Join</a>
-                    <a href="#">Portfolio</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Developer</a>
-                </div>
+                <i><h4 class="text-muted pb-5">Your next movement</span></i>
+                <br>
             </div>
         </div>
     </body>
