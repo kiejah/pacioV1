@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Http\Request;
 use Laravel\Passport\Passport;
 use App\Http\Controllers\Controller;
@@ -16,9 +16,10 @@ class UserAuthController extends Controller{
     //customer register api
     public function register(UserRegisterRequest $request) {
         $validated = $request->validated();
-        return  $validated ;
 
         $validated['password'] = Hash::make($validated['password']);
+        $validated['username'] =   $validated['fname'];
+
         if($validated) {
             $createUser = User::create($validated)->createToken('authToken');
             $token = $createUser->accessToken;

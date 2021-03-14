@@ -20,15 +20,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'company/admin'], function(){
     Route::post('/register', 'Api\UserAuthController@register' );
-});
 
 
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
-    // Route::get('/user', function( Request $request ){
-    //   return $request->user();
     Route::post('/login', 'Api\UserAuthController@login' );
 
+
 });
+
+   // only auth routes
+   Route::group(['middleware' => 'auth:api'], function(){
+
+   });
+
+
+
 
 Route::apiResource('parcels','API\ParcelContoller');
 Route::apiResource('receipients','API\ReceipientController');

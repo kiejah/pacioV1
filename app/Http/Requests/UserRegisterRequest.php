@@ -21,10 +21,10 @@ class UserRegisterRequest extends FormRequest
      */
     public function rules(){
         return [
-            'fname' => 'required|string|max:50',
-            'fname' => 'required|string|max:50',
+            'fname' => 'required|string',
+            'lname' => 'required|string',
             'phonenumber' => 'required|string|max:50',
-            'prof_thumbnail' => 'required|url|',
+            'prof_thumbnail' => 'string', // 'url',
             'role_id' => 'integer|nullable',
             'branch_id' => 'integer|nullable',
             'company_id' => 'integer|nullable',
