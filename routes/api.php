@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\BookParcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,16 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'company/admin'], function(){
     Route::post('/register', 'Api\UserAuthController@register' );
 
-
     Route::post('/login', 'Api\UserAuthController@login' );
-
 
 });
 
-   // only auth routes
-   Route::group(['middleware' => 'auth:api'], function(){
+ // only auth routes
+Route::group(['middleware' => 'auth:api'], function(){
 
-   });
+});
 
+Route::post('/bookparcel','API\BookParcelController@store');
 
 
 

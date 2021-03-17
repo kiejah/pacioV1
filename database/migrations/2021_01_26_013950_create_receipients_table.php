@@ -18,11 +18,11 @@ class CreateReceipientsTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('company_id')->index();
             $table->unsignedInteger('parcelTrackerCode')->index();
-            $table->string('name');
-            $table->string('email');
-            $table->string('nationalID');
-            $table->string('phoneNumber');
-            $table->string('altPhoneNumber');
+            $table->string('receipientsName');
+            $table->string('receipientsEmail')->nullable();
+            $table->string('receipientsNationalID');
+            $table->string('receipientsPhoneNumber');
+            $table->string('receipientsAltPhoneNumber')->nullable();
             $table->timestamps();
         });
     }

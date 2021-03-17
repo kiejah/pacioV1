@@ -18,11 +18,11 @@ class CreateSendersTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->unsignedInteger('company_id')->index();
             $table->unsignedInteger('parcelTrackerCode')->index();
-            $table->string('name');
-            $table->string('email');
-            $table->string('nationalID');
-            $table->string('phoneNumber');
-            $table->string('altPhoneNumber');
+            $table->string('senderName');
+            $table->string('senderEmail')->nullable();
+            $table->string('senderNationalID');
+            $table->string('senderPhoneNumber');
+            $table->string('senderAltPhoneNumber')->nullable();
             $table->timestamps();
         });
     }
